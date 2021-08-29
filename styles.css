@@ -1,40 +1,83 @@
 * {
     box-sizing: border-box;
 }
+
+:root {
+    --calcHeight: 450px;
+    --calcWidth: 300px;
+    --keyHeight: 13%;
+    --keyFontsize: 200%;
+    --totalFontsize: 250%;
+    --outputHeight: 22%
+}
+
+@media screen and (min-width: 768px){
+    :root {
+        --calcHeight: 750px;
+        --calcWidth: 500px;
+        --keyHeight: 14%;
+        --keyFontsize: 300%;
+        --totalFontsize: 450%;
+    }
+}
+
 .row::after {
     content: "";
     clear: both;
     display: table;
 }
 body {
+    height: 95vh;
     display: flex;
     flex-direction: column;    
     align-items: center;
-}
-h1 {
-    width: 100%;
-    text-align: center;
+    justify-content: center;
+    background-color: rgba(32, 35, 36, 0.534);
 }
 .key {
-    width: 23%;
-    height: 50px;
-    border: solid black;
-    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22%;
+    height: var(--keyHeight);
+    font-size: var(--keyFontsize);
+    background-color: rgb(58, 57, 57);
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 50%;
     margin: auto;
-    text-align: center;
-    line-height: 50px;    
+}
+.key:hover{
+    cursor: pointer;
+    opacity: .75;
+}
+[data-operator]{
+    background-color: rgba(0, 153, 255, .80);
+}
+[data-modify = "negative"]{
+    background-color: rgba(0, 204, 255, 0.80);
+    font-size: calc(var(--keyFontsize) - 40%);
+}
+[data-clear]{
+    background-color: rgba(0, 204, 255, 0.80);
 }
 #calculator {
-    height: 450px;
-    width: 300px;
+    height: var(--calcHeight);
+    width: var(--calcWidth);
+    padding: 1%;
+    background-color: black;
+    color: rgba(255, 255, 255, 0.808);
     border: solid black;
+    border-radius: 2%;
     display: flex;
     flex-wrap: wrap;
 }
 #output {
     width: 95%;
-    height: 100px;
-    border: solid black;
+    height: var(--outputHeight);
+    font-size: var(--totalFontsize);
+    color: white;
+    background-color: rgb(77, 77, 77);
+    border-radius: 10%;
     margin: auto;
 }
 #lastTotal {
@@ -43,6 +86,8 @@ h1 {
     visibility: hidden;
 }
 #currentTotal {
+    text-align: right;
+    padding-right: 2%;
     width: 100%;
-    height: 65%
+    height: 65%;
 }
