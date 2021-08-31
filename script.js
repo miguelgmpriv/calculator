@@ -51,6 +51,7 @@ function firstNum(event){
     const digit = event.target.dataset.number;
     //Check for leading zeros and negation/decimal as well as entries after operator function
     if (numClear === true || currentTotal.textContent === '0'){
+        if (lastTotal.textContent.indexOf("=") >= 0) lastTotal.textContent = '';
         numClear = false; 
         currentTotal.textContent = '';
     } else if (currentTotal.textContent === '-0' || currentTotal.textContent === '-00'){
@@ -79,6 +80,7 @@ function clear(event){
     //Clears event in case called by another function.
     if(typeof event === 'undefined'){
         currentTotal.textContent = '0';
+        if (lastTotal.textContent.indexOf("=") >= 0) lastTotal.textContent = '';
         numClear = false;
         return;
     } else if (event.target.dataset.clear === 'Delete'){
@@ -100,9 +102,10 @@ function clear(event){
 function modify(event){
     //Adds or removes negative and decimal.
     const modify = event.target.dataset.modify;
-    if (numClear) clear();
+    //if (numClear) clear();
     switch (modify){
         case '.':
+            if (numClear) clear()
             if (currentTotal.textContent.indexOf('.') === -1){
                 return currentTotal.textContent += event.target.dataset.modify;
             }
